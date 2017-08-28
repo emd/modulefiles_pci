@@ -1,0 +1,46 @@
+#%Module 1.0
+#
+# Modulefile for random_data
+#
+
+# ===============================================================
+# Change ONLY this:
+# -----------------
+# Set TCL variable for root `random_data` directory;
+# change this to the top-level directory of `random_data` package
+# (i.e. the directory created when pulling from the github repo).
+set random_data_root $env(HOME)/python/projects/random_data
+# ===============================================================
+
+proc ModulesHelp {} {
+   puts stderr "Modulefile for the `random_data` Python package."
+   puts stderr ""
+   puts stderr "The following modules are loaded, if not already present:"
+   puts stderr "    python"
+   puts stderr ""
+   puts stderr "The following environment variables are defined:"
+   puts stderr "    \$RANDOMDATAROOT - path to the `random_data` package"
+   puts stderr ""
+   puts stderr "The relevant `random_data` paths are added to the following:"
+   puts stderr "    \$PYTHONPATH"
+   puts stderr ""
+   puts stderr "The following aliases are defined:"
+   puts stderr "    test_random_data - automated testing of `random_data` package"
+   puts stderr ""
+}
+
+conflict random_data
+
+# Load python module, if not already present
+if { ! [ is-loaded python ] } { module load python }
+
+# Set the `random_data` environmental variables
+setenv RANDOMDATAROOT $random_data_root
+
+# Always prepend paths, so that the last module loaded
+# will have it's path searched first.
+prepend-path PYTHONPATH $random_data_root
+
+# Define alias for automated testing of `random_data`
+set python_dir [file dirname $env(PYTHON)]
+set-alias test_random_data "$python_dir/nosetests $random_data_root/tests/."

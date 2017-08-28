@@ -1,0 +1,49 @@
+#%Module 1.0
+#
+# Modulefile for fit_ellipse
+#
+
+# ===============================================================
+# Change ONLY this:
+# -----------------
+# Set TCL variable for root `fit_ellipse` directory;
+# change this to the top-level directory of `fit_ellipse` package
+# (i.e. the directory created when pulling from the github repo,
+# which is listed in the `ModulesHelp` section below).
+set fit_ellipse_root $env(HOME)/python/projects/fit_ellipse
+# ===============================================================
+
+proc ModulesHelp {} {
+   puts stderr "Modulefile for the `fit_ellipse` Python package."
+   puts stderr ""
+   puts stderr "This module defines routines for least-squares fitting"
+   puts stderr "a set of points to an ellipse. To use this module,"
+   puts stderr "please clone from:"
+   puts stderr ""
+   puts stderr "   https://github.com/ndvanforeest/fit_ellipse"
+   puts stderr ""
+   puts stderr "and modify `fit_ellipse_root` in this modulefile"
+   puts stderr "to point at the cloned repository."
+   puts stderr ""
+   puts stderr "The following modules are loaded, if not already present:"
+   puts stderr "    python"
+   puts stderr ""
+   puts stderr "The following environment variables are defined:"
+   puts stderr "    \$FITELLIPSEROOT - path to the `fit_ellipse` package"
+   puts stderr ""
+   puts stderr "The relevant `fit_ellipse` paths are added to the following:"
+   puts stderr "    \$PYTHONPATH"
+   puts stderr ""
+}
+
+conflict fit_ellipse
+
+# Load python module, if not already present
+if { ! [ is-loaded python ] } { module load python }
+
+# Set the `fit_ellipse` environmental variables
+setenv FITELLIPSEROOT $fit_ellipse_root
+
+# Always prepend paths, so that the last module loaded
+# will have it's path searched first.
+prepend-path PYTHONPATH $fit_ellipse_root

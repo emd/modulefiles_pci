@@ -1,0 +1,46 @@
+#%Module 1.0
+#
+# Modulefile for distinct_colours
+#
+
+# ===================================================================
+# Change ONLY this:
+# -----------------
+# Set TCL variable for root `distinct_colours` directory;
+# change this to the directory containing `distinct_colours.py`.
+set distinct_colours_root $env(HOME)/python/projects/distinct_colours
+# ===================================================================
+
+proc ModulesHelp {} {
+   puts stderr "Modulefile for the `distinct_colours` Python package."
+   puts stderr ""
+   puts stderr "This module defines color-blind-proof, distinct color schemes."
+   puts stderr "If you wish to use this module, please download from:"
+   puts stderr ""
+   puts stderr "    https://personal.sron.nl/~pault/python/distinct_colours.py"
+   puts stderr ""
+   puts stderr "and modify `distinct_colours_root` in this modulefile"
+   puts stderr "to point at the directory containing `distinct_colours.py`."
+   puts stderr ""
+   puts stderr "The following modules are loaded, if not already present:"
+   puts stderr "    python"
+   puts stderr ""
+   puts stderr "The following environment variables are defined:"
+   puts stderr "    \$DISTINCTCOLOURSROOT - path to the `distinct_colours` package"
+   puts stderr ""
+   puts stderr "The relevant `distinct_colours` paths are added to the following:"
+   puts stderr "    \$PYTHONPATH"
+   puts stderr ""
+}
+
+conflict distinct_colours
+
+# Load python module, if not already present
+if { ! [ is-loaded python ] } { module load python }
+
+# Set the `random_data` environmental variables
+setenv DISTINCTCOLOURSROOT $distinct_colours_root
+
+# Always prepend paths, so that the last module loaded
+# will have it's path searched first.
+prepend-path PYTHONPATH $distinct_colours_root

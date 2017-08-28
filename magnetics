@@ -1,0 +1,62 @@
+#%Module 1.0
+#
+# Modulefile for magnetics
+#
+
+# ===============================================================
+# Change ONLY this:
+# -----------------
+# Set TCL variable for root `magnetics` directory;
+# change this to the top-level directory of `magnetics` package
+# (i.e. the directory created when pulling from the github repo).
+set magnetics_root $env(HOME)/python/projects/magnetics
+# ===============================================================
+
+proc ModulesHelp {} {
+   puts stderr "Modulefile for the `magnetics` Python package."
+   puts stderr ""
+   puts stderr "The following modules are loaded, if not already present:"
+   puts stderr "    python"
+   puts stderr ""
+   puts stderr "The following environment variables are defined:"
+   puts stderr "    \$MAGNETICSROOT - path to the `magnetics` package"
+   puts stderr "    \$PYPEDROOT - path to the `pyped` package"
+   puts stderr "        (`magnetics` uses Osborne's `Data` class from `pyped`)"
+   puts stderr ""
+   puts stderr "The relevant `magnetics` paths are added to the following:"
+   puts stderr "    \$PYTHONPATH"
+   puts stderr ""
+   puts stderr "The following aliases are defined:"
+   puts stderr "    test_magnetics - automated testing of `magnetics` package"
+   puts stderr ""
+}
+
+conflict magnetics
+
+# Load needed modules, if not already present
+if { ! [ is-loaded defaults ] } { module load defaults }
+if { ! [ is-loaded python ] } { module load python }
+
+# `magnetics` package depends on Tom Osborne's
+# :py:class:`Data <pyDatautils.data.Data>`, and
+# :py:module:`data <pyDatautils.data>` itself has
+# a dependence on Tom Osborne's :py:module:`pyFFTw <pyFFTw>`.
+# Both of these modules are components of the larger
+# `pyped` module on GA's Iris cluster.
+#
+# Set TCL variable for top-level directory `pyped`.
+set pyped_root /fusion/projects/codes/pyped/lib/python2.7/site-packages
+
+# Set the `magnetics` environmental variables
+setenv MAGNETICSROOT $magnetics_root
+setenv PYPEDROOT $pyped_root
+
+# Always prepend paths, so that the last module loaded
+# will have it's path searched first.
+prepend-path PYTHONPATH $pyped_root/pyDatautils
+prepend-path PYTHONPATH $pyped_root/pyFFTW
+prepend-path PYTHONPATH $magnetics_root
+
+# Define alias for automated testing of `magnetics`
+set python_dir [file dirname $env(PYTHON)]
+set-alias test_magnetics "$python_dir/nosetests $magnetics_root/tests/."

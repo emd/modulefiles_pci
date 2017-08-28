@@ -1,0 +1,46 @@
+#%Module 1.0
+#
+# Modulefile for filters
+#
+
+# ===============================================================
+# Change ONLY this:
+# -----------------
+# Set TCL variable for root `filters` directory;
+# change this to the top-level directory of `filters` package
+# (i.e. the directory created when pulling from the github repo).
+set filters_root $env(HOME)/python/projects/filters
+# ===============================================================
+
+proc ModulesHelp {} {
+   puts stderr "Modulefile for the `filters` Python package."
+   puts stderr ""
+   puts stderr "The following modules are loaded, if not already present:"
+   puts stderr "    python"
+   puts stderr ""
+   puts stderr "The following environment variables are defined:"
+   puts stderr "    \$FILTERSROOT - path to the `filters` package"
+   puts stderr ""
+   puts stderr "The relevant `filters` paths are added to the following:"
+   puts stderr "    \$PYTHONPATH"
+   puts stderr ""
+   puts stderr "The following aliases are defined:"
+   puts stderr "    test_filters - automated testing of `filters` package"
+   puts stderr ""
+}
+
+conflict filters
+
+# Load python module, if not already present
+if { ! [ is-loaded python ] } { module load python }
+
+# Set the `filters` environmental variables
+setenv FILTERSROOT $filters_root
+
+# Always prepend paths, so that the last module loaded
+# will have it's path searched first.
+prepend-path PYTHONPATH $filters_root
+
+# Define alias for automated testing of `filters`
+set python_dir [file dirname $env(PYTHON)]
+set-alias test_filters "$python_dir/nosetests $filters_root/tests/."

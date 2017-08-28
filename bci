@@ -1,0 +1,60 @@
+#%Module 1.0
+#
+# Modulefile for bci
+#
+
+# ===============================================================
+# Change ONLY this:
+# -----------------
+# Set TCL variable for root `bci` directory;
+# change this to the top-level directory of `bci` package
+# (i.e. the directory created when pulling from the github repo).
+set bci_root $env(HOME)/python/projects/bci
+
+# The `bci` package additionally relies on the following modules:
+#
+#     `filters`
+#
+# The modulefiles for these modules should be located
+# in a directory `modulefiles_dir`.
+set modulefiles_dir $env(HOME)/modulefiles
+# ===============================================================
+
+proc ModulesHelp {} {
+   puts stderr "Modulefile for the `bci` (bi-color interferometer) Python package."
+   puts stderr ""
+   puts stderr "The following modules are loaded, if not already present:"
+   puts stderr "    python"
+   puts stderr "    mdsplus"
+   puts stderr "    filters"
+   puts stderr ""
+   puts stderr "The following environment variables are defined:"
+   puts stderr "    \$BCIROOT - path to the `bci` package"
+   puts stderr "    \$bci_path - BCI MDSplus tree-path definitions"
+   puts stderr ""
+   puts stderr "The relevant `bci` paths are added to the following:"
+   puts stderr "    \$PYTHONPATH"
+   puts stderr ""
+   puts stderr "The following aliases are defined:"
+   puts stderr "    test_bci - automated testing of `bci` package"
+   puts stderr ""
+}
+
+conflict bci
+
+# Load python and MDSplus modules, if not already present
+if { ! [ is-loaded python ] } { module load python }
+if { ! [ is-loaded mdsplus ] } { module load mdsplus }
+if { ! [ is-loaded $modulefiles_dir/filters ] } { module load $modulefiles_dir/filters }
+
+# Set the `bci` environmental variables
+setenv BCIROOT $bci_root
+setenv bci_path atlas.gat.com::/data/usershots/~t\;atlas.gat.com::/data/shots/~t/~f~e/~d~c\;atlas.gat.com::/data/orphans/\;atlas.gat.com::/data/models/~t
+
+# Always prepend paths, so that the last module loaded
+# will have it's path searched first.
+prepend-path PYTHONPATH $bci_root
+
+# Define alias for automated testing of `bci`
+set python_dir [file dirname $env(PYTHON)]
+set-alias test_bci "$python_dir/nosetests $bci_root/tests/."

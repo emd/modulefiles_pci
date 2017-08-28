@@ -1,0 +1,51 @@
+#%Module 1.0
+#
+# Modulefile for gadata
+#
+
+# ===============================================================
+# Change ONLY this:
+# -----------------
+# Set TCL variable for root `gadata` directory;
+# change this to the top-level directory of `gadata` package
+# (i.e. whichever directory the class definition from
+#
+#       https://diii-d.gat.com/diii-d/Gadata_py
+#
+# is copied to).
+set gadata_root $env(HOME)/python/projects/gadata
+# ===============================================================
+
+proc ModulesHelp {} {
+   puts stderr "Modulefile for `gadata` Python class, which can retrieve"
+   puts stderr "MDSplus signals, PTDATA pointnames, and Pseudo-pointnames."
+   puts stderr "The class definition can be copied from GA's internal site:"
+   puts stderr ""
+   puts stderr "    https://diii-d.gat.com/diii-d/Gadata_py"
+   puts stderr ""
+   puts stderr "and placed under the directory defined by \$GADATAROOT."
+   puts stderr ""
+   puts stderr "The following modules are loaded, if not already present:"
+   puts stderr "    python"
+   puts stderr "    mdsplus"
+   puts stderr ""
+   puts stderr "The following environment variables are defined:"
+   puts stderr "    \$GADATAROOT - path to the `gadata` package"
+   puts stderr ""
+   puts stderr "The relevant `gadata` paths are added to the following:"
+   puts stderr "    \$PYTHONPATH"
+   puts stderr ""
+}
+
+conflict gadata
+
+# Load python and MDSplus modules, if not already present
+if { ! [ is-loaded python ] } { module load python }
+if { ! [ is-loaded mdsplus ] } { module load mdsplus }
+
+# Set the `gadata` environmental variables
+setenv GADATAROOT $gadata_root
+
+# Always prepend paths, so that the last module loaded
+# will have it's path searched first.
+prepend-path PYTHONPATH $gadata_root
