@@ -3,13 +3,9 @@
 # Modulefile for distinct_colours
 #
 
-# ===================================================================
-# Change ONLY this:
-# -----------------
 # Set TCL variable for root `distinct_colours` directory;
 # change this to the directory containing `distinct_colours.py`.
-set distinct_colours_root $env(HOME)/python/projects/distinct_colours
-# ===================================================================
+set distinct_colours_root /fusion/projects/diagnostics/pci/code/python/distinct_colours
 
 proc ModulesHelp {} {
    puts stderr "Modulefile for the `distinct_colours` Python package."
