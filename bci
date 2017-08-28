@@ -3,13 +3,7 @@
 # Modulefile for bci
 #
 
-# ===============================================================
-# Change ONLY this:
-# -----------------
-# Set TCL variable for root `bci` directory;
-# change this to the top-level directory of `bci` package
-# (i.e. the directory created when pulling from the github repo).
-set bci_root $env(HOME)/python/projects/bci
+set bci_root /fusion/projects/diagnostics/pci/code/python/bci
 
 # The `bci` package additionally relies on the following modules:
 #
@@ -17,8 +11,7 @@ set bci_root $env(HOME)/python/projects/bci
 #
 # The modulefiles for these modules should be located
 # in a directory `modulefiles_dir`.
-set modulefiles_dir $env(HOME)/modulefiles
-# ===============================================================
+set modulefiles_dir /fusion/projects/diagnostics/pci/code/python/modulefiles_pci
 
 proc ModulesHelp {} {
    puts stderr "Modulefile for the `bci` (bi-color interferometer) Python package."
