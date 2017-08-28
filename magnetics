@@ -3,14 +3,7 @@
 # Modulefile for magnetics
 #
 
-# ===============================================================
-# Change ONLY this:
-# -----------------
-# Set TCL variable for root `magnetics` directory;
-# change this to the top-level directory of `magnetics` package
-# (i.e. the directory created when pulling from the github repo).
-set magnetics_root $env(HOME)/python/projects/magnetics
-# ===============================================================
+set magnetics_root /fusion/projects/diagnostics/pci/code/python/magnetics
 
 proc ModulesHelp {} {
    puts stderr "Modulefile for the `magnetics` Python package."
