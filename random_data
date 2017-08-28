@@ -3,14 +3,7 @@
 # Modulefile for random_data
 #
 
-# ===============================================================
-# Change ONLY this:
-# -----------------
-# Set TCL variable for root `random_data` directory;
-# change this to the top-level directory of `random_data` package
-# (i.e. the directory created when pulling from the github repo).
-set random_data_root $env(HOME)/python/projects/random_data
-# ===============================================================
+set random_data_root /fusion/projects/diagnostics/pci/code/python/random_data
 
 proc ModulesHelp {} {
    puts stderr "Modulefile for the `random_data` Python package."
