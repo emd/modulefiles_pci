@@ -3,14 +3,7 @@
 # Modulefile for filters
 #
 
-# ===============================================================
-# Change ONLY this:
-# -----------------
-# Set TCL variable for root `filters` directory;
-# change this to the top-level directory of `filters` package
-# (i.e. the directory created when pulling from the github repo).
-set filters_root $env(HOME)/python/projects/filters
-# ===============================================================
+set filters_root /fusion/projects/diagnostics/pci/code/python/filters
 
 proc ModulesHelp {} {
    puts stderr "Modulefile for the `filters` Python package."
