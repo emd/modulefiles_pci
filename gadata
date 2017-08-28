@@ -3,18 +3,7 @@
 # Modulefile for gadata
 #
 
-# ===============================================================
-# Change ONLY this:
-# -----------------
-# Set TCL variable for root `gadata` directory;
-# change this to the top-level directory of `gadata` package
-# (i.e. whichever directory the class definition from
-#
-#       https://diii-d.gat.com/diii-d/Gadata_py
-#
-# is copied to).
-set gadata_root $env(HOME)/python/projects/gadata
-# ===============================================================
+set gadata_root /fusion/projects/diagnostics/pci/code/python/gadata
 
 proc ModulesHelp {} {
    puts stderr "Modulefile for `gadata` Python class, which can retrieve"
