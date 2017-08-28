@@ -3,13 +3,7 @@
 # Modulefile for mitpci
 #
 
-# ===============================================================
-# Change ONLY this section:
-# -------------------------
-# Set TCL variable for root `mitpci` directory;
-# change this to the top-level directory of `mitpci` package
-# (i.e. the directory created when pulling from the github repo).
-set mitpci_root $env(HOME)/python/projects/mitpci
+set mitpci_root /fusion/projects/diagnostics/pci/code/python/mitpci
 
 # The `mitpci` package additionally relies on the following
 # modules:
@@ -22,8 +16,7 @@ set mitpci_root $env(HOME)/python/projects/mitpci
 #
 # The modulefiles for these modules should be located
 # in a directory `modulefiles_dir`.
-set modulefiles_dir $env(HOME)/modulefiles
-# ===============================================================
+set modulefiles_dir /fusion/projects/diagnostics/pci/code/python/modulefiles_pci
 
 proc ModulesHelp {} {
    puts stderr "Modulefile for the `mitpci` Python package."
