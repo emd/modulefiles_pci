@@ -39,3 +39,6 @@ That's it! The `mitpci` module can then be loaded and used in Python.
 Information about the module and its automated testing can be obtained via
 
     $ module help /fusion/projects/diagnostics/pci/code/python/mitpci
+
+For frequent use of any of the above modules, it may be useful
+to create aliases and/or load the modules in your login script.
