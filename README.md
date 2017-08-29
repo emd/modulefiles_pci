@@ -33,12 +33,12 @@ The modules can be loaded, unloaded, etc.,
 as is discussed in the above-linked Iris documentation.
 For example, to load the `mitpci` module, type
 
-    $ module load /fusion/projects/diagnostics/pci/code/python/mitpci
+    $ module load /fusion/projects/diagnostics/pci/code/python/modulefiles_pci/mitpci
 
 That's it! The `mitpci` module can then be loaded and used in Python.
 Information about the module and its automated testing can be obtained via
 
-    $ module help /fusion/projects/diagnostics/pci/code/python/mitpci
+    $ module help /fusion/projects/diagnostics/pci/code/python/modulefiles_pci/mitpci
 
 For frequent use of any of the above modules, it may be useful
 to create aliases and/or load the modules in your login script.
